@@ -151,6 +151,11 @@ macro_rules! html_impl {
         $crate::macros::add_attribute(&mut $stack, &attr, $val);
         html_impl! { @vtag $stack ($($tail)*) }
     };
+    (@vtag $stack:ident ($($attr:ident):+ = $val:expr, $($tail:tt)*)) => {
+        let attr = vec![$(stringify!($attr).to_string()),+].join(":");
+        $crate::macros::add_attribute(&mut $stack, &attr, $val);
+        html_impl! { @vtag $stack ($($tail)*) }
+    };
     // Traditional tag closing
     ($stack:ident (< / $endtag:ident > $($tail:tt)*)) => {
         let endtag = stringify!($endtag);
