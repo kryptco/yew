@@ -147,7 +147,7 @@ impl FetchService {
             var callback = @{callback};
             var handle = {
                 interrupt: false,
-                callback,
+                callback: callback,
             };
             fetch(request).then(function(response) {
                 response.text().then(function(data) {
